@@ -1,4 +1,4 @@
-from util import Util
+from utility.util import Util
 
 class Grover:
     def __init__(self):

@@ -1,2 +1,4 @@
-from util import Util
-from grover import Grover
+import os
+
+from utility.util import Util
+from utility.grover import Grover
