@@ -1,4 +1,4 @@
-from utility.util import Util
+from utility.util import n_control_not
 
 class Grover:
     def __init__(self):
@@ -12,7 +12,7 @@ class Grover:
         for i in range(n):
             circuit.x(qs[i])
         circuit.h(qs[0])
-        Util.n_control_not(circuit, [qs[i] for i in range(1, n)], qs[0], anc)
+        n_control_not(circuit, [qs[i] for i in range(1, n)], qs[0], anc)
         circuit.h(qs[0])
         for i in range(n):
             circuit.x(qs[i])

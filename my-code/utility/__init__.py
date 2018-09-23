@@ -1,4 +1,4 @@
 import os
 
-from utility.util import Util
+from utility.util import *
 from utility.grover import Grover
