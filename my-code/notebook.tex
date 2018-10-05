@@ -1,0 +1,1050 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Maximum Finding}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{maximum-finding}{%
+\section{Maximum Finding}\label{maximum-finding}}
+
+Maximum finding algorithm using qiskit library using n-bit comparator
+with minimum anciallary register used. 4-bit version will be
+experimented using the real device from IBM.
+
+\hypertarget{the-outline-of-algorithm}{%
+\subsection{The outline of algorithm}\label{the-outline-of-algorithm}}
+
+We will use n-qbit register to store our current maximum value called
+\texttt{qc}. In order to find the maximum value we need to repeatedly
+find one larger value (index) than \texttt{qc} and stop when we can't
+find any. For each iteration we will use \texttt{qs} to store our larger
+than \texttt{qc} value.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  randomly initialize \texttt{qc} and measure its value
+\item
+  initialize \texttt{qs} into super position of all states
+\item
+  apply Grover's algorithm using 3-bit comparator as the black-box
+  function comparing \texttt{qs} and \texttt{qc} and set the input
+  search space on \texttt{qs}
+\item
+  if \texttt{qs} is larger than \texttt{qc} replace \texttt{qc} with
+  \texttt{qs} value and repeat step (2)
+\item
+  if \texttt{qs} is not larger than \texttt{qc} then we conclude that
+  \texttt{qs} is the maximum value
+\end{enumerate}
+
+    To start we need to import all the packages we need.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} importing QISKit}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{QuantumCircuit}\PY{p}{,} \PY{n}{ClassicalRegister}\PY{p}{,} \PY{n}{QuantumRegister}\PY{p}{,} \PY{n}{QISKitError}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{available\PYZus{}backends}\PY{p}{,} \PY{n}{execute}\PY{p}{,} \PY{n}{register}\PY{p}{,} \PY{n}{get\PYZus{}backend}\PY{p}{,} \PY{n+nb}{compile}
+        
+        \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{visualization}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k}{import} \PY{n}{circuit\PYZus{}drawer}
+        
+        \PY{c+c1}{\PYZsh{} import other necessary stuff}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        
+        \PY{k+kn}{import} \PY{n+nn}{sys}\PY{o}{,} \PY{n+nn}{time}\PY{o}{,} \PY{n+nn}{getpass}
+        \PY{k}{try}\PY{p}{:}
+            \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k+kn}{import} \PY{n+nn}{Qconfig}
+            \PY{n}{qx\PYZus{}config} \PY{o}{=} \PY{p}{\PYZob{}}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{APItoken}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{Qconfig}\PY{o}{.}\PY{n}{APItoken}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{url}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{Qconfig}\PY{o}{.}\PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{url}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qconfig loaded from }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{Qconfig}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}file\PYZus{}\PYZus{}}\PY{p}{)}
+        \PY{k}{except}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qconfig.py not found in parent directory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qconfig loaded from ../Qconfig.py.
+
+    \end{Verbatim}
+
+    To find the maximum value we need comparator first. Since we will be
+using multiple qubit control-cot gate, we will make a function
+\texttt{n\_control\_not()} which we will use a lot later on.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{n\PYZus{}control\PYZus{}not}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}array}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{,} \PY{n}{flip\PYZus{}array}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} error checking}
+            \PY{k}{if} \PY{n}{flip\PYZus{}array} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{)} \PY{o}{!=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{flip\PYZus{}array}\PY{p}{)}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q\PYZus{}array(len:}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{) and flip\PYZus{}array(len:}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{) must have the same length}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{flip\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ancillary\PYZus{}array}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ancillary array length is not enough (}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{) for q\PYZus{}array (}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ancillary\PYZus{}array}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{if} \PY{n}{flip\PYZus{}array} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                \PY{n}{flip\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} todo handle wrong flip\PYZus{}array}
+            
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} put X\PYZhy{}gate if flip}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{flip\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{} special case for only 2 bits}
+            \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{q\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{q\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{reversed}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{q\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillary\PYZus{}array}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} clean up X\PYZhy{}gate}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{flip\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    We already have the n\_control\_not gate so now, onto the comparator.
+
+    Let's test out n\_control\_not function we just implemented with 2
+qubits (the special case).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{p}{)}
+        \PY{n}{qs} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{qs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{anc} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{target} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{qs}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{anc}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+        
+        
+        \PY{n}{n\PYZus{}control\PYZus{}not}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{qs}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{)}
+        
+        \PY{n}{circuit\PYZus{}drawer}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}3}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    We will see that the ancillary register shouldn't be used as intended.
+
+And here's the 4 qubits version
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{p}{)}
+        \PY{n}{qs} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{qs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{anc} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{target} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{qs}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{anc}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+        
+        
+        \PY{n}{n\PYZus{}control\PYZus{}not}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{qs}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{)}
+        
+        \PY{n}{circuit\PYZus{}drawer}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}4}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{n\PYZus{}bit\PYZus{}comparator}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{anc}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} check whether two register is the same length}
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{!=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two register to compare must have the same length: a is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, b is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+            \PY{n}{anc\PYZus{}len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{anc}\PY{p}{)}
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+            \PY{k}{if} \PY{n}{anc\PYZus{}len} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ancillary bit is not enough: anc\PYZus{}len is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, need at least }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ qbit}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{anc\PYZus{}len}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} compare the MSB}
+            \PY{n}{n\PYZus{}control\PYZus{}not}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{p}{[}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{anc}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} all more significant bits must be equalg}
+                \PY{n}{j} \PY{o}{=} \PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                
+                \PY{n}{n\PYZus{}control\PYZus{}not}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{p}{[}\PY{n}{anc}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{p}{[}\PY{n}{anc}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{anc\PYZus{}len}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{reversed}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's see how the 4-qubit comparator looks like.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+        
+        \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{b} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{anc} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{target} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{anc}\PY{p}{)}
+        \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+        
+        \PY{n}{n\PYZus{}bit\PYZus{}comparator}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{anc}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{circuit\PYZus{}drawer}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}6}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Before we can do some comparison testing, we implement some helper
+functions to help us out.
+
+The \texttt{int\_to\_qubit} function will help us initializing qregs via
+binary string.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{int\PYZus{}to\PYZus{}qubit}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{circuit}\PY{p}{,} \PY{n}{qs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{bits\PYZus{}required} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{qs\PYZus{}len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{qs}\PY{p}{)}
+            \PY{k}{if} \PY{n}{qs\PYZus{}len} \PY{o}{\PYZlt{}} \PY{n}{bits\PYZus{}required}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input n = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ requires }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ bits but qs is only }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ bits}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{bits\PYZus{}required}\PY{p}{,} \PY{n}{qs\PYZus{}len}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{bstr} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0:b\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+            \PY{n}{bstr} \PY{o}{=} \PY{n}{bstr}\PY{o}{.}\PY{n}{zfill}\PY{p}{(}\PY{n}{qs\PYZus{}len}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{qs\PYZus{}len}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{bstr}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}             print(\PYZsq{}bit \PYZob{}\PYZcb{} of \PYZob{}\PYZcb{} is 1\PYZsq{}.format(i, bstr))}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's test out this comparator a bit. By comparing 11 and 0 to 15.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{:}
+            \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{p}{)}
+            \PY{n}{a} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{b} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{anc} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{target} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{cs} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{result}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+            \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+            \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{anc}\PY{p}{)}
+            \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+            \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{cs}\PY{p}{)}
+            
+            \PY{n}{int\PYZus{}to\PYZus{}qubit}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,} \PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+            \PY{n}{int\PYZus{}to\PYZus{}qubit}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{qc}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+            
+            \PY{n}{n\PYZus{}bit\PYZus{}comparator}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{anc}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{qc}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{target}\PY{p}{,} \PY{n}{cs}\PY{p}{)}
+          
+            \PY{n}{circuit\PYZus{}drawer}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Execute circuit}
+            \PY{n}{job} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{p}{[}\PY{n}{qc}\PY{p}{]}\PY{p}{,} \PY{n}{backend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{local\PYZus{}qasm\PYZus{}simulator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+            \PY{n}{result} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{counts} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+            \PY{k}{if} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{11} \PY{o+ow}{and} \PY{n}{counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{10}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{correct: 11 \PYZgt{} }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{11} \PY{o+ow}{and} \PY{n}{counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{10}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{correct: 11 \PYZlt{}= }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{error: 11 is neither larger nor less than }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.....finished.....}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+correct: 11 > 0
+correct: 11 > 1
+correct: 11 > 2
+correct: 11 > 3
+correct: 11 > 4
+correct: 11 > 5
+correct: 11 > 6
+correct: 11 > 7
+correct: 11 > 8
+correct: 11 > 9
+correct: 11 > 10
+correct: 11 <= 11
+correct: 11 <= 12
+correct: 11 <= 13
+correct: 11 <= 14
+correct: 11 <= 15
+{\ldots}finished{\ldots}
+
+    \end{Verbatim}
+
+    The next step is use the comparator and do Grover's search to find a
+larger value. We'll be using Boyer et al version of Grover's algorithm
+which goes as follow.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  initialize \(m = 1\) and set \(\lambda = 6/5\)
+\item
+  choose \texttt{j} uniformly at random among the nonnegative integers
+  smaller than \texttt{m}
+\item
+  apply j iterations of Grover's algorithm starting from initial state
+  \(\left|\Psi_0\right\rangle = \sum_i \frac{1}{\sqrt{N}}\left|i\right\rangle\)
+\item
+  observe the register: let \(i\) be the outcome
+\item
+  if \texttt{T{[}i{]}\ =\ x}, the problem is solved: \textbf{exit}
+\item
+  otherwise, set \texttt{m} to min(\(\lambda m\), \(\sqrt{N}\))\\
+  and go back to step 2.
+\end{enumerate}
+
+    We will need inverse around the mean function
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{inv\PYZus{}around\PYZus{}mean}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{qs}\PY{p}{,} \PY{n}{anc}\PY{p}{)}\PY{p}{:}
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{qs}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{n\PYZus{}control\PYZus{}not}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{p}{[}\PY{n}{qs}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{qs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{anc}\PY{p}{)}
+            \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    And now for the main part, finding a larger value using Grover's
+algorithm.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{def} \PY{n+nf}{init\PYZus{}grover}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{f\PYZus{}input}\PY{p}{,} \PY{n}{f\PYZus{}output}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{f\PYZus{}input}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{f\PYZus{}input}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+             \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{f\PYZus{}output}\PY{p}{)}
+             \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{f\PYZus{}output}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{grover\PYZus{}find\PYZus{}larger}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{start\PYZus{}value}\PY{p}{,} \PY{n}{iterations}\PY{p}{,} \PY{n}{device}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{local\PYZus{}qasm\PYZus{}simulator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    return value: counts (results from running grover using \PYZsq{}iteration\PYZsq{} iterations)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{p}{)}
+             \PY{n}{a} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{b} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{anc} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{target} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{cs} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{result}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+             \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{anc}\PY{p}{)}
+             \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+             \PY{n}{qc}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{cs}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} init}
+             \PY{n}{init\PYZus{}grover}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+             \PY{n}{qc}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+             \PY{n}{int\PYZus{}to\PYZus{}qubit}\PY{p}{(}\PY{n}{start\PYZus{}value}\PY{p}{,} \PY{n}{qc}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iterations}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{n\PYZus{}bit\PYZus{}comparator}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{anc}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{inv\PYZus{}around\PYZus{}mean}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{anc}\PY{p}{)}
+             
+             \PY{n}{qc}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+             \PY{n}{qc}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{cs}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Execute circuit}
+             \PY{n}{job} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{p}{[}\PY{n}{qc}\PY{p}{]}\PY{p}{,} \PY{n}{backend}\PY{o}{=}\PY{n}{device}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{n}{shots}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{counts} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+             \PY{n}{counts} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb}{int}\PY{p}{(}\PY{n}{k}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} \PY{p}{:} \PY{n}{v} \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n}{counts}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+             \PY{k}{return} \PY{n}{counts}
+\end{Verbatim}
+
+
+    We already implemented all the components we need in order to run
+maximum finding algorithm.
+
+Let's start with the simplest case, the case where every index of search
+space corresponds to the index value itself and we can check whether our
+implemenation of Grover's algorithm is correct by finding value larger
+than 11 (4-bit) using \textbf{one Grover's iteration}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k}{def} \PY{n+nf}{fxn}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{warnings}\PY{o}{.}\PY{n}{warn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deprecated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+ne}{DeprecationWarning}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n}{warnings}\PY{o}{.}\PY{n}{catch\PYZus{}warnings}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{warnings}\PY{o}{.}\PY{n}{simplefilter}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{fxn}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} maximum finding scenario 1: f[x] = x}
+             \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{11}
+             \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{f\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{loop} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{n}{counts} \PY{o}{=} \PY{n}{grover\PYZus{}find\PYZus{}larger}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{visualization}\PY{o}{.}\PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'counts': \{'0011': 282, '0111': 266, '1011': 251, '1111': 201\}\}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see from the plots above, it seems that our individual parts
+are working as intended and we're ready to test running maximum finding
+algorithm on local simulator.
+
+\hypertarget{maximum-finding-algorithm-on-local-simulator}{%
+\subsubsection{Maximum finding algorithm on local
+simulator}\label{maximum-finding-algorithm-on-local-simulator}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  initialize \(m = 1\) and set \(\lambda = 6/5\)
+\item
+  choose \texttt{j} uniformly at random among the nonnegative integers
+  smaller than \texttt{m}
+\item
+  apply j iterations of Grover's algorithm starting from initial state
+  \(\left|\Psi_0\right\rangle = \sum_i \frac{1}{\sqrt{N}}\left|i\right\rangle\)
+\item
+  observe the register: let \(i\) be the outcome
+\item
+  if \texttt{T{[}i{]}\ =\ x}, the problem is solved: \textbf{exit}
+\item
+  otherwise, set \texttt{m} to min(\(\lambda m\), \(\sqrt{N}\))\\
+  and go back to step 2.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{n}{total\PYZus{}itr} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{f\PYZus{}eval} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{cur\PYZus{}max\PYZus{}idx} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{found} \PY{o}{=} \PY{k+kc}{True}
+         
+         \PY{c+c1}{\PYZsh{} loop to find larger number}
+         \PY{k}{while} \PY{n}{found}\PY{p}{:}
+             \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{phi} \PY{o}{=} \PY{l+m+mi}{6}\PY{o}{/}\PY{l+m+mi}{5}
+             \PY{n}{itr} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{c+c1}{\PYZsh{}     print(\PYZsq{}start searching: current = \PYZob{}\PYZcb{}, with j = \PYZob{}\PYZcb{}, iteration count = \PYZob{}\PYZcb{}\PYZsq{}.format(cur\PYZus{}max\PYZus{}idx, j, total\PYZus{}itr))}
+             \PY{k}{while} \PY{n}{itr} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)} \PY{o}{/} \PY{n}{phi} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{j} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}         print()}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{j = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, m = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{j}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{cnts} \PY{o}{=} \PY{n}{grover\PYZus{}find\PYZus{}larger}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{,} \PY{n}{j}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{cnts}\PY{p}{)}
+                 \PY{n}{f\PYZus{}eval} \PY{o}{+}\PY{o}{=} \PY{n}{j} \PY{o}{*} \PY{l+m+mi}{3}
+                 \PY{n}{itr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{n\PYZus{}idx} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{cnts}\PY{p}{)}
+                 \PY{n}{m} \PY{o}{*}\PY{o}{=} \PY{n}{phi}
+                 \PY{k}{if} \PY{n}{n\PYZus{}idx} \PY{o}{\PYZgt{}} \PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{:}
+                     \PY{n}{cur\PYZus{}max\PYZus{}idx} \PY{o}{=} \PY{n}{n\PYZus{}idx}
+                     \PY{n}{found} \PY{o}{=} \PY{k+kc}{True}
+                     \PY{k}{break}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{found} \PY{o}{=} \PY{k+kc}{False}
+         
+             \PY{n}{total\PYZus{}itr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{3}\PY{o}{*}\PY{n}{itr}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{........}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{search finish: max found = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, total function evaluations = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, total iteration count = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{,} \PY{n}{f\PYZus{}eval}\PY{p}{,} \PY{n}{total\PYZus{}itr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+j = 0, m = 1
+\{'counts': \{'0000': 1, '1100': 1\}\}
+\{0: 1, 3: 1\}
+j = 1, m = 1.2
+\{'counts': \{'0000': 1, '1100': 1\}\}
+\{0: 1, 3: 1\}
+j = 1, m = 1.44
+\{'counts': \{'1100': 2\}\}
+\{3: 2\}
+j = 1, m = 1.728
+\{'counts': \{'1000': 2\}\}
+\{1: 2\}
+j = 2, m = 2.0736
+\{'counts': \{'0000': 1, '0010': 1\}\}
+\{0: 1, 4: 1\}
+j = 0, m = 1
+\{'counts': \{'1111': 2\}\}
+\{15: 2\}
+j = 0, m = 1
+\{'counts': \{'1011': 1, '1101': 1\}\}
+\{13: 1, 11: 1\}
+j = 0, m = 1.2
+\{'counts': \{'0100': 1, '1101': 1\}\}
+\{2: 1, 11: 1\}
+j = 0, m = 1.44
+\{'counts': \{'0011': 1, '1100': 1\}\}
+\{12: 1, 3: 1\}
+j = 1, m = 1.728
+\{'counts': \{'0000': 1, '1101': 1\}\}
+\{0: 1, 11: 1\}
+j = 0, m = 2.0736
+\{'counts': \{'0111': 1, '1110': 1\}\}
+\{14: 1, 7: 1\}
+j = 2, m = 2.48832
+\{'counts': \{'1010': 1, '1100': 1\}\}
+\{5: 1, 3: 1\}
+j = 2, m = 2.9859839999999997
+\{'counts': \{'0110': 1, '1000': 1\}\}
+\{6: 1, 1: 1\}
+j = 2, m = 3.5831807999999996
+\{'counts': \{'0110': 1, '0111': 1\}\}
+\{6: 1, 14: 1\}
+j = 3, m = 4.299816959999999
+\{'counts': \{'1010': 2\}\}
+\{5: 2\}
+{\ldots}
+search finish: max found = 15, total function evaluations = 45, total iteration count = 45
+
+    \end{Verbatim}
+
+    \hypertarget{now-lets-test-the-same-one-with-real-devices.}{%
+\subsubsection{Now let's test the same one with real
+devices.}\label{now-lets-test-the-same-one-with-real-devices.}}
+
+To use the real devices, we need to register our API token to the server
+first.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{register}\PY{p}{(}\PY{n}{qx\PYZus{}config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APItoken}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{qx\PYZus{}config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{url}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} available\PYZus{}backends(\PYZob{}\PYZsq{}simulator\PYZsq{}: False\PYZcb{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        QISKitError                               Traceback (most recent call last)
+
+        <ipython-input-27-c86d6bab01bc> in <module>()
+    ----> 1 register(qx\_config['APItoken'], qx\_config['url'])
+          2 \# available\_backends(\{'simulator': False\})
+
+
+        /usr/local/lib/python3.6/site-packages/qiskit/wrapper/\_wrapper.py in register(provider\_class, *args, **kwargs)
+         54         raise QISKitError("Couldn't instantiate provider! Error: \{0\}".format(ex))
+         55 
+    ---> 56     \_DEFAULT\_PROVIDER.add\_provider(provider)
+         57     return provider
+         58 
+
+
+        /usr/local/lib/python3.6/site-packages/qiskit/wrapper/defaultqiskitprovider.py in add\_provider(self, provider)
+        156             self.providers.append(provider)
+        157         else:
+    --> 158             raise QISKitError("The same provider has already been registered!")
+        159 
+        160         if common\_backends:
+
+
+        QISKitError: 'The same provider has already been registered!'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k+kn}{import} \PY{n+nn}{datetime}
+         
+         \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{n}{total\PYZus{}itr} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{f\PYZus{}eval} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{cur\PYZus{}max\PYZus{}idx} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{found} \PY{o}{=} \PY{k+kc}{True}
+         
+         \PY{c+c1}{\PYZsh{} loop to find larger number}
+         \PY{k}{while} \PY{n}{found}\PY{p}{:}
+             \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{phi} \PY{o}{=} \PY{l+m+mi}{6}\PY{o}{/}\PY{l+m+mi}{5}
+             \PY{n}{itr} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start searching: current = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, iteration count = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{,} \PY{n}{total\PYZus{}itr}\PY{p}{)}\PY{p}{)}
+             \PY{k}{while} \PY{n}{itr} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{n}\PY{p}{)} \PY{o}{/} \PY{n}{phi} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{j} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{j = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, m = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{j}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{cnts} \PY{o}{=} \PY{n}{grover\PYZus{}find\PYZus{}larger}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{,} \PY{n}{j}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{device}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibmqx5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{cnts}\PY{p}{)}
+                 \PY{n}{f\PYZus{}eval} \PY{o}{+}\PY{o}{=} \PY{n}{j} \PY{o}{*} \PY{l+m+mi}{3}
+                 \PY{n}{itr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{n\PYZus{}idx} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{cnts}\PY{p}{)}
+                 \PY{n}{m} \PY{o}{*}\PY{o}{=} \PY{n}{phi}
+                 \PY{k}{if} \PY{n}{n\PYZus{}idx} \PY{o}{\PYZgt{}} \PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{:}
+                     \PY{n}{cur\PYZus{}max\PYZus{}idx} \PY{o}{=} \PY{n}{n\PYZus{}idx}
+                     \PY{n}{found} \PY{o}{=} \PY{k+kc}{True}
+                     \PY{k}{break}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{found} \PY{o}{=} \PY{k+kc}{False}
+         
+             \PY{n}{total\PYZus{}itr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{3}\PY{o}{*}\PY{n}{itr}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{........}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{search finish: max found = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, total function evaluations = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, total iteration count = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cur\PYZus{}max\PYZus{}idx}\PY{p}{,} \PY{n}{f\PYZus{}eval}\PY{p}{,} \PY{n}{total\PYZus{}itr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+start searching: current = 3, iteration count = 0
+2018-09-03 14:15:50.992654
+j = 0, m = 1
+\{'time': 13.328871011734009, 'counts': \{'0001': 1, '1011': 1\}, 'date': '2018-09-03T07:16:09.130Z'\}
+\{8: 1, 13: 1\}
+start searching: current = 13, iteration count = 3
+2018-09-03 14:16:17.823485
+j = 0, m = 1
+\{'time': 13.231416940689087, 'counts': \{'0000': 1, '1000': 1\}, 'date': '2018-09-03T07:16:35.099Z'\}
+\{0: 1, 1: 1\}
+2018-09-03 14:16:43.733264
+j = 1, m = 1.2
+\{'time': 18.561569929122925, 'counts': \{'0100': 1, '0101': 1\}, 'date': '2018-09-03T07:17:20.913Z'\}
+\{2: 1, 10: 1\}
+2018-09-03 14:18:21.366915
+j = 0, m = 1.44
+\{'time': 13.596553087234497, 'counts': \{'0110': 1, '1111': 1\}, 'date': '2018-09-03T07:18:39.178Z'\}
+\{6: 1, 15: 1\}
+start searching: current = 15, iteration count = 12
+2018-09-03 14:18:46.954297
+j = 0, m = 1
+\{'time': 13.3371000289917, 'counts': \{'0101': 1, '0110': 1\}, 'date': '2018-09-03T07:19:04.259Z'\}
+\{10: 1, 6: 1\}
+2018-09-03 14:19:13.338484
+j = 1, m = 1.2
+\{'time': 19.221101999282837, 'counts': \{'1001': 1, '1101': 1\}, 'date': '2018-09-03T07:19:51.754Z'\}
+\{9: 1, 11: 1\}
+2018-09-03 14:19:54.910292
+j = 0, m = 1.44
+\{'time': 13.703861951828003, 'counts': \{'0000': 1, '1011': 1\}, 'date': '2018-09-03T07:20:12.283Z'\}
+\{0: 1, 13: 1\}
+2018-09-03 14:20:20.661536
+j = 1, m = 1.728
+\{'time': 19.054047107696533, 'counts': \{'0100': 1, '0101': 1\}, 'date': '2018-09-03T07:20:59.116Z'\}
+\{2: 1, 10: 1\}
+2018-09-03 14:21:07.855970
+j = 2, m = 2.0736
+\{'time': 32.37568402290344, 'counts': \{'0010': 1, '0100': 1\}, 'date': '2018-09-03T07:22:17.849Z'\}
+\{4: 1, 2: 1\}
+2018-09-03 14:22:27.658459
+j = 0, m = 2.48832
+\{'time': 13.831731081008911, 'counts': \{'0001': 1, '0110': 1\}, 'date': '2018-09-03T07:22:44.977Z'\}
+\{8: 1, 6: 1\}
+2018-09-03 14:22:52.606419
+j = 0, m = 2.9859839999999997
+\{'time': 13.837500810623169, 'counts': \{'0011': 1, '1011': 1\}, 'date': '2018-09-03T07:23:10.064Z'\}
+\{12: 1, 13: 1\}
+2018-09-03 14:23:21.060439
+j = 2, m = 3.5831807999999996
+\{'time': 29.46199893951416, 'counts': \{'0110': 1, '1101': 1\}, 'date': '2018-09-03T07:24:26.559Z'\}
+\{6: 1, 11: 1\}
+2018-09-03 14:24:37.370417
+j = 2, m = 4.299816959999999
+\{'time': 30.400261878967285, 'counts': \{'0000': 1, '1110': 1\}, 'date': '2018-09-03T07:25:38.342Z'\}
+\{0: 1, 7: 1\}
+{\ldots}
+search finish: max found = 15, total function evaluations = 27, total iteration count = 39
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{warnings}
+        
+        \PY{k}{def} \PY{n+nf}{fxn}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{warnings}\PY{o}{.}\PY{n}{warn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deprecated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+ne}{DeprecationWarning}\PY{p}{)}
+        
+        \PY{k}{with} \PY{n}{warnings}\PY{o}{.}\PY{n}{catch\PYZus{}warnings}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{warnings}\PY{o}{.}\PY{n}{simplefilter}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{fxn}\PY{p}{(}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} maximum finding scenario 1: f[x] = x}
+        
+            \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{f\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{loop} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                \PY{n}{nn}\PY{p}{,} \PY{n}{nit}\PY{p}{,} \PY{n}{nfc} \PY{o}{=} \PY{n}{grover\PYZus{}find\PYZus{}larger}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibmqx5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{iterations} \PY{o}{+}\PY{o}{=} \PY{n}{nit}
+                \PY{n}{f\PYZus{}count} \PY{o}{+}\PY{o}{=} \PY{n}{nfc}
+                \PY{n}{loop} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loop \PYZsh{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{: max = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, called with }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, result = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, f\PYZus{}count = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{loop}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{nn}\PY{p}{)}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{nn}\PY{p}{,} \PY{n}{f\PYZus{}count}\PY{p}{)}\PY{p}{)}
+                \PY{k}{if} \PY{n}{n} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{nn}\PY{p}{:}
+                    \PY{k}{break}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{n} \PY{o}{=} \PY{n}{nn}
+                
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{............finished..............}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loop \#1: max = 5, called with 0, result = 5, f\_count = 1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Got a 500 code response to https://quantumexperience.ng.bluemix.net/api/Jobs?access\_token=UWusASToBTIPTnGO0FCdFRgAbsFrheSrrqjnz56D0neiVZw2NCpT9vvXPG49OL3p: 500 Error: Failed to establish a backside connection
+Got a 500 code response to https://quantumexperience.ng.bluemix.net/api/Jobs/5b7ee6258aad16003ad6608c?access\_token=UWusASToBTIPTnGO0FCdFRgAbsFrheSrrqjnz56D0neiVZw2NCpT9vvXPG49OL3p: 500 Error: Failed to establish a backside connection
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loop \#2: max = 7, called with 5, result = 7, f\_count = 2
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Got a 500 code response to https://quantumexperience.ng.bluemix.net/api/Jobs?access\_token=UWusASToBTIPTnGO0FCdFRgAbsFrheSrrqjnz56D0neiVZw2NCpT9vvXPG49OL3p: 500 Error: Failed to establish a backside connection
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loop \#3: max = 7, called with 7, result = 7, f\_count = 12
+{\ldots}finished{\ldots}
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
