@@ -1,4 +1,4 @@
-from utility.util import n_control_not
+from utility.q_util import n_control_not
 
 class Grover:
     def __init__(self):

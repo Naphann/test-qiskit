@@ -1,4 +1,5 @@
 import os
 
-from utility.util import *
+from utility.q_util import *
 from utility.grover import Grover
+from utility.util import *
