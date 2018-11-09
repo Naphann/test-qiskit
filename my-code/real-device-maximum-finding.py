@@ -86,10 +86,11 @@ n = 3
 N = 2 ** n
 
 max_iter = int(math.pi / 4 * math.sqrt(N) + 1)
-total = N * max_iter
+total = N * (max_iter - 1)
+current_exp = 0
 for i in range(N):
     for iter in range(1, max_iter):
-        current_exp = i * max_iter + iter
+        current_exp += 1
         print('doing experiment {}/{}'.format(current_exp, total))
         do_experiment(n, i, iter)
 
