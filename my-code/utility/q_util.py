@@ -16,9 +16,11 @@ def n_control_not(circuit, q_array, target, ancillary_array, flip_array=None):
     for i in range(n):
         if flip_array[i] == -1:
             circuit.x(q_array[i])
-        
+    # special case for 1 bit
+    if n == 1:
+        circuit.cx(q_array[0], target)
     # special case for only 2 bits
-    if n == 2:
+    elif n == 2:
         circuit.ccx(q_array[0], q_array[1], target)
     else:
         circuit.ccx(q_array[0], q_array[1], ancillary_array[0])
