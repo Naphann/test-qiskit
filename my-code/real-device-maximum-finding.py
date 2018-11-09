@@ -32,7 +32,7 @@ def try_connect():
     register(qx_config['APItoken'], qx_config['url'])
     print(available_backends())
 
-def do_experiment(n, st_val, shots=1000, iter=1, useRealDevice=False):
+def do_experiment(n, st_val, iter, shots=1000, useRealDevice=False):
     # setup
     qs = QuantumRegister(n, 'qs')
     st = QuantumRegister(n, 'st')
@@ -84,7 +84,12 @@ def do_experiment(n, st_val, shots=1000, iter=1, useRealDevice=False):
 # try_connect()
 n = 3
 N = 2 ** n
+
+max_iter = int(math.pi / 4 * math.sqrt(N) + 1)
+total = N * max_iter
 for i in range(N):
-    for iter in range(int(math.pi / 4 * math.sqrt(N) + 1)):
+    for iter in range(1, max_iter):
+        current_exp = i * max_iter + iter
+        print('doing experiment {}/{}'.format(current_exp, total))
         do_experiment(n, i, iter)
 
