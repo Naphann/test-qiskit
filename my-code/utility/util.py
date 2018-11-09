@@ -40,7 +40,7 @@ def create_pic_folder():
     os.mkdir(dir_name)
     return dir_name
 
-def save_histogram(data, dirname, title, number_to_keep=False):
+def save_histogram(data, dirname, title, fname=None, number_to_keep=False):
     """Plot a histogram of data.
 
     data is a dictionary of  {'000': 5, '010': 113, ...}
@@ -75,5 +75,7 @@ def save_histogram(data, dirname, title, number_to_keep=False):
     
     if not os.path.exists(dirname):
         os.mkdir(dirname)
-    plt.savefig('{}/{}.png'.format(dirname, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")))
+    if fname is None:
+        fname = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    plt.savefig('{}/{}.png'.format(dirname, fname))
     plt.close()
