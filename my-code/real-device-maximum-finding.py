@@ -1,4 +1,4 @@
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, QISKitError
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, QISKitError, IBMQ
 from qiskit import available_backends, execute, register, get_backend, compile
 
 from qiskit.tools import visualization
@@ -42,6 +42,7 @@ def do_experiment(n, st_val, iter, shots=1000, useRealDevice=False):
     qc = QuantumCircuit(qs, st, anc, out, cs)
 
     Util.int_to_qubit(st_val, qc, st)
+    qc.barrier()
 
     # prepare grover
     qc.h(qs)
@@ -53,36 +54,45 @@ def do_experiment(n, st_val, iter, shots=1000, useRealDevice=False):
         Util.greater_comp(qc, qs, st, anc, out[0])
         Grover.inv_around_mean(qc, qs, anc)
 
+    qc.barrier()
     qc.measure(qs, cs)
 
 
     # visualization.plot_circuit(qc)
-    device_name = 'local_qasm_simulator'
+    device_name = 'ibmq_qasm_simulator'
     if useRealDevice:
-        device_name = 'ibmq_qasm_simulator'
-    my_backend = get_backend(device_name)
-    qobj = compile([qc], backend=my_backend, shots=1000)
-    job = my_backend.run(qobj)
+        # device_name = 'ibmqx5'
+        device_name = 'ibmq_16_melbourne'
+    backend = IBMQ.get_backend(device_name)
+    qobj = compile([qc], backend=backend, shots=shots)
+    job = backend.run(qobj)
+    jid = str(job.job_id())
     lapse = 0
     interval = 60
-    while not job.done:
-        print('Status @ {} minutes'.format(lapse))
-        print(job.status)
+    while job.status().name != 'DONE':
+        print('{} Status @ {} minutes'.format(jid, lapse))
+        print(job.status())
+        print('quere pos: {}'.format(job.queue_position()))
         time.sleep(interval)
         lapse += 1
-    print(job.status)
+    print(job.status())
+    result = job.result()
     if useRealDevice:
-        print(job.id)
+        print(jid)
     print('total time: {} minutes'.format(lapse))
     print('================================================')
 
     result = job.result()
     counts = result.get_counts(qc)
     counts = {int(k[::-1],2) : v for k,v in counts.items()}
-    Util.save_histogram(counts, 'pics/sim-{}-bits'.format(n), '{}-{}-{}'.format(n, st_val, iter), fname='{}-{}-{}'.format(n, st_val, iter))
+    if useRealDevice:
+        Util.save_histogram(counts, 'pics/real-{}-bits'.format(n), '{}-{}-{}'.format(n, st_val, iter), fname='{}-{}-{}'.format(n, st_val, iter))
+    else:
+        Util.save_histogram(counts, 'pics/sim-{}-bits'.format(n), '{}-{}-{}'.format(n, st_val, iter), fname='{}-{}-{}'.format(n, st_val, iter))
 
 # try_connect()
-n = 3
+IBMQ.load_accounts()
+n = 4
 N = 2 ** n
 
 max_iter = int(math.pi / 4 * math.sqrt(N) + 1)
@@ -91,6 +101,7 @@ current_exp = 0
 for i in range(N):
     for iter in range(1, max_iter):
         current_exp += 1
-        print('doing experiment {}/{}'.format(current_exp, total))
-        do_experiment(n, i, iter)
+        print('doing experiment {}/{}: {}-{}-{}'.format(current_exp, total, n, i, iter))
+        # do_experiment(n, i, iter, shots=1000, useRealDevice=True)
+        do_experiment(n, i, iter, shots=1000)
 
